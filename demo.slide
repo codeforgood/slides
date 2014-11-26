@@ -1,0 +1,61 @@
+go hello("Simulmedia!")
+24 Nov 2014
+
+Sadish Ravi
+sadish@simulmedia.com
+
+* Go!!
+
+   Programming language by Google
+   Pet project by Robert Griesemer, Rob Pike, Ken Thompson
+   Modern day C
+   Reliable python
+   Simpler Java
+   Friendly Erlang/Pascal
+
+* Why Go?
+
+   Write sequential, non-blocking and highly concurrent code
+   Compile to native code and execute faster
+   Enjoy type safety at the same time feel dynamic
+   Benefit from Garbage collection, stack handling, goroutines, channels etc
+   Write systems code, web app or anything you want
+   very soon you can write an Android app using Go
+
+* Hello Sum, Python!
+.play sum.py
+
+Simple! But can we make it faster for larger arrays.
+
+  Yes!! Threads, Multiprocessing !!
+
+* Lets try in Go
+.play sum.go
+
+Similar to python, bit more verbose but not that bad
+
+* Lets try to make it faster with few changes!!
+
+How?
+
+  Distribute the computation. Utilize all cores!
+
+Enter Goroutines and channels
+
+Lets change the method to publish the result to a channel when its done
+instead of making the caller to wait
+
+  func sum2(a []int, c chan int) {
+    sum := 0
+    for _, v := range a {
+        sum += v
+    }
+    c <- sum // send sum to c
+  }
+
+How can we leverage this function to make the computation faster??
+
+  Divide and Conquer
+
+* Concurrent version
+.play sum_concurrent.go
