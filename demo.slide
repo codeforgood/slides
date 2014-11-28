@@ -1,4 +1,4 @@
-go hello("Simulmedia!")
+go hello("World!")
 24 Nov 2014
 
 Sadish Ravi
@@ -59,3 +59,38 @@ How can we leverage this function to make the computation faster??
 
 * Concurrent version
 .play sum_concurrent.go
+
+* Benefits achieved
+
+  Logic expressed as sequential code
+  Designed to run concurrently
+  Can be parallized to high degree and tuned to get faster results
+
+* Related Problem
+
+Process data file and apply downstream pipeline operations
+
+  read => transform => filter => clean => project => write
+
+Data is big but not big enough to achieve hadoop/emr benefits
+
+Trying to solve in
+Java:
+1. Sequential processing
+2. Multithreaded ... (Thread pool/Executers/Synchronzied/locks/Joins ...)
+3. Multiprocess ??? :(
+
+Python:
+1. Sequential processing easier than Java/less boilerplate
+2. threading .. Shared access/locks/Global Interpreter lock
+3. Multiprocessing .. Fork/Star/Join/queue to communicate/Pipes/Locks to sync processes
+
+
+* Simple Solution in Go
+1. No threads/No multiprocess/No pools/No locks/mutexes/fork/join
+2. Concurrency is built as language primitive in the form of Goroutines.
+3. Communication and synchronization between goroutines are handled using channels
+another language basic construct
+
+* Go, Mapper!
+.play -edit mapper.go
