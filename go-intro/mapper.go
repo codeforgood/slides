@@ -14,10 +14,10 @@ func timeTrack(start time.Time, name string) {
     log.Printf("%s took %s", name, elapsed)
 }
 
+// START MERGE
 func merge(cs ...<-chan string) <-chan string {
     var wg sync.WaitGroup
     out := make(chan string, 10)
-
     // Start an output goroutine for each input channel in cs.  output
     // copies values from c to out until c is closed, then calls wg.Done.
     output := func(c <-chan string) {
@@ -30,7 +30,6 @@ func merge(cs ...<-chan string) <-chan string {
     for _, c := range cs {
         go output(c)
     }
-
     // Start a goroutine to close out once all the output goroutines are
     // done.  This must start after the wg.Add call.
     go func() {
@@ -39,10 +38,12 @@ func merge(cs ...<-chan string) <-chan string {
     }()
     return out
 }
+// END MERGE
 
+// START READ
 func readFile(file string) <-chan string{
   out := make(chan string, 10)
-  go func(){
+  go func(){ // HL
     fmt.Println("Reading")
     f, err := os.Open(file)
     if err != nil {
@@ -57,10 +58,12 @@ func readFile(file string) <-chan string{
       log.Fatal(err)
     }
     close(out)
-  }()
+  }() // HL
   return out
 }
+// END READ
 
+// START FILTER
 func filter(in <-chan string) <-chan string{
   out := make(chan string)
   go func(){
@@ -74,7 +77,9 @@ func filter(in <-chan string) <-chan string{
   }()
   return out
 }
+// END FILTER
 
+// START WRITE
 func writeFile(in <-chan string, file string){
   fmt.Println("writing")
   f, err := os.Create(file)
@@ -84,11 +89,14 @@ func writeFile(in <-chan string, file string){
   defer f.Close()
   w := bufio.NewWriter(f)
   for line := range in{
+    fmt.Println(line)
     w.WriteString(line + "\n")
   }
   w.Flush()
 }
+// END WRITE
 
+// START MAIN
 func main(){
   defer timeTrack(time.Now(), "gofs")
   fmt.Println("Go - File Filter")
@@ -98,6 +106,7 @@ func main(){
   out3 := filter(input_chan)
   out4 := filter(input_chan)
   out_chan := merge(out1, out2, out3, out4)
-  writeFile(out_chan, "out.txt")
+  writeFile(out_chan, "out.out")
   fmt.Println("Exciting from module")
 }
+// END MAIN

@@ -92,5 +92,17 @@ Python:
 3. Communication and synchronization between goroutines are handled using channels
 another language basic construct
 
-* Go, Mapper!
-.play -edit mapper.go
+* Mapper! ReadFile
+.code -numbers mapper.go /START READ/,/END READ/
+
+* Mapper! Filter
+.code -numbers mapper.go /START FILTER/,/END FILTER/
+
+* Mapper! Merge
+.code -numbers mapper.go /START MERGE/,/END MERGE/
+
+* Mapper! WriteFile
+.code -numbers mapper.go /START WRITE/,/END WRITE/
+
+* Mapper! Main
+.play -numbers mapper.go /START MAIN/,/END MAIN/
