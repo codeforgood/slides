@@ -92,7 +92,7 @@ func writeFile(in <-chan string, file string){
 func main(){
   defer timeTrack(time.Now(), "gofs")
   fmt.Println("Go - File Filter")
-  input_chan := readFile("/tmp/test.txt")
+  input_chan := readFile("test.txt")
   out1 := filter(input_chan)
   out2 := filter(input_chan)
   out3 := filter(input_chan)
