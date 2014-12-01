@@ -106,3 +106,35 @@ another language basic construct
 
 * Mapper! Main
 .play -numbers mapper.go /START MAIN/,/END MAIN/
+
+* Writing Go code
+ 1. Start simple
+ 2. Write sequential code (one global goroutine)
+ 3. Be happy and make product sort of happy
+ 4. Want to please your manager??
+ 4. Identify areas of code that can execute concurrently and express them as small functions/goroutine.
+ 5. Use channels to communicate between goroutine
+ 6. Tested? No blocking routines? Works as before?
+ 7. Now charge it..Run 100'sor 1000's of routines
+ 9. Tune it to get best performance
+ 8. Now your manager and product are proud of you!!!
+
+* Remember what Rob Pike said
+
+ "when people hear the word concurrency they often think of parallelism, a related but quite distinct concept.
+  In programming, concurrency is the composition of independently executing processes,
+  while parallelism is the simultaneous execution of (possibly related) computations.
+  Concurrency is about dealing with lots of things at once.
+  Parallelism is about doing lots of things at once."
+
+*"Parallelism comes as a by-product for a well concurrent program"*
+
+.link http://www.youtube.com/watch?v=cN_DpYBzKso "Concurrency is not parallelism"
+
+* References
+
+.link http://learnxinyminutes.com/docs/go/
+.link https://gobyexample.com/
+.link https://play.golang.org/
+.link http://golang.org/
+.link http://blog.nindalf.com/how-goroutines-work/
