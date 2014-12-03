@@ -66,6 +66,19 @@ How can we leverage this function to make the computation faster??
   Designed to run concurrently
   Can be parallized to high degree and tuned to get faster results
 
+* Benchmark go code
+.code bench/sum.go /START/,/END/
+.code bench/sum_test.go
+
+* Benchmark results
+
+go test -bench=.
+
+   testing: warning: no tests to run
+   PASS
+   BenchmarkSum10	500000000	         6.69 ns/op
+   ok  	github.com/codeforgood/slides/go-intro/bench	4.065s
+
 * Related Problem
 
 Process data file and apply downstream pipeline operations
