@@ -1,10 +1,13 @@
 go hello("World!")
-24 Nov 2014
+04 Dec 2014
 
 Sadish Ravi
 sadish@simulmedia.com
 
-* Go!!
+* Gopher!!
+.image http://www.unixstickers.com/image/cache/data/stickers/golang/golang.sh-600x600.png
+
+* Go !!
 
    Programming language by Google
    Pet project by Robert Griesemer, Rob Pike, Ken Thompson
@@ -29,7 +32,7 @@ Simple! But can we make it faster for larger arrays.
 
   Yes!! Threads, Multiprocessing !!
 
-* Lets try in Go
+* Sum 1.0 in Go
 .play sum.go
 
 Similar to python, bit more verbose but not that bad
@@ -40,8 +43,44 @@ How?
 
   Distribute the computation. Utilize all cores!
 
-Enter Goroutines and channels
+Enter Goroutines
 
+*Threads vs Goroutines*
+
+  -GoRoutine is a function that executes concurrently with other go-routines in
+   the same address-space
+
+  -Go claims it can execute 100-1000-10's of thousands of Goroutine in a program
+
+  -In typical languages program threads are mapped to OS threads and end up
+   using fixed amount of memory in stack and involves context switching.
+   Thus creating too many threads is not a good idea
+
+  -Also threads communicate via shared memory and which needs complex
+   synchronization and locks to prevent threads from stepping on each other toe's
+
+* Contd...
+
+  -On the other hand Goroutines are handled by Go Runtime and are not visible to OS
+   The runtime multiplexes more than one Goroutines on to the same OS thread.
+
+  -They are on the heap and each require around 8Kb of space
+
+  -Goroutines communicate via message passing(channels)
+
+  -Context switching with Goroutines are much lesser than threads as the
+   number of registers involved in the switch is just 3 compared to some 16 in threads
+
+  -Mutiple Threads blocking on external resources is a problem but
+   in case of Goroutines even if some goroutines are blocked, the runtime
+   will take care of scheduling other routines
+
+  -Go program can dictate[GOMAXPROCS] the number CPU Cores to be used.
+   Best performance can be achieved by tuning the number of cores and
+   number of goroutines for the program
+
+
+* Sum 2.0
 Lets change the method to publish the result to a channel when its done
 instead of making the caller to wait
 
@@ -105,6 +144,10 @@ Python:
 3. Communication and synchronization between goroutines are handled using channels
 another language basic construct
 
+* Source data
+
+.code test.txt
+
 * Mapper! ReadFile
 .code -numbers mapper.go /START READ/,/END READ/
 
@@ -134,15 +177,24 @@ another language basic construct
 
 * Remember what Rob Pike said
 
- "when people hear the word concurrency they often think of parallelism, a related but quite distinct concept.
-  In programming, concurrency is the composition of independently executing processes,
-  while parallelism is the simultaneous execution of (possibly related) computations.
-  Concurrency is about dealing with lots of things at once.
-  Parallelism is about doing lots of things at once."
+   "when people hear the word concurrency they often think of parallelism, a related but quite distinct concept.
+
+    In programming, concurrency is the composition of independently executing processes, while parallelism is the simultaneous execution of (possibly related) computations.
+
+    Concurrency is about dealing with lots of things at once.
+    Parallelism is about doing lots of things at once"
+
+    - Rob Pike
 
 *"Parallelism comes as a by-product for a well concurrent program"*
 
 .link http://www.youtube.com/watch?v=cN_DpYBzKso "Concurrency is not parallelism"
+
+* About this presentation
+
+Build using Go Present tool
+
+.link https://godoc.org/github.com/polaris1119/go.tools/present
 
 * References
 
